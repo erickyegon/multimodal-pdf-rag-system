@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import SimpleApp from './SimpleApp';
 
 // Environment Variable Validation
 console.log('Environment Variables:');
@@ -15,6 +15,6 @@ if (!process.env.REACT_APP_API_URL) {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <SimpleApp />
   </React.StrictMode>
 );

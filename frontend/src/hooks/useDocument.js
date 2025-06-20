@@ -91,13 +91,43 @@ export const useDocument = () => {
 
   const getDocuments = useCallback(async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/v1/upload/documents`);
+      console.log('useDocument: Fetching documents from API...');
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+      console.log('useDocument: API URL:', apiUrl);
+
+      // Immediate fallback - don't wait for API
+      setDocuments([]);
+      console.log('useDocument: Set empty documents array immediately');
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => {
+        controller.abort();
+        console.log('useDocument: Request timed out after 2 seconds');
+      }, 2000); // Reduced to 2 seconds
+
+      const response = await fetch(`${apiUrl}/api/v1/upload/documents`, {
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      clearTimeout(timeoutId);
+
       if (response.ok) {
         const docs = await response.json();
+        console.log('useDocument: Documents fetched successfully:', docs);
         setDocuments(docs);
+      } else {
+        console.warn('useDocument: API returned error, keeping empty array');
       }
     } catch (error) {
-      console.error('Error fetching documents:', error);
+      if (error.name === 'AbortError') {
+        console.warn('useDocument: Request aborted, keeping empty array');
+      } else {
+        console.error('useDocument: Error fetching documents:', error);
+      }
+      // Documents already set to empty array above
     }
   }, []);
 

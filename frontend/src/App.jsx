@@ -20,14 +20,14 @@ import { useChat, useDocument } from './hooks';
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentDocument, setCurrentDocument] = useState(null);
-  
+
   const {
     messages,
     loading,
     sendMessage,
     clearChat
   } = useChat();
-  
+
   const {
     documents,
     uploadDocument,
@@ -36,9 +36,15 @@ function App() {
   } = useDocument();
 
   useEffect(() => {
-    // Load documents on app start
-    getDocuments();
-  }, []);
+    // Load documents in background - NEVER BLOCK UI
+    setTimeout(() => {
+      getDocuments().catch(error => {
+        console.error('Background document loading failed:', error);
+      });
+    }, 100); // Load after UI renders
+  }, [getDocuments]);
+
+  // ALWAYS SHOW UI IMMEDIATELY - NO LOADING SCREENS
 
   return (
     <Router>
