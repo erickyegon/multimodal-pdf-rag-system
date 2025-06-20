@@ -1,0 +1,108 @@
+/* App.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animation for loading states */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+/* Chat message styles */
+.chat-message {
+  @apply mb-4 flex;
+}
+
+.chat-message.user {
+  @apply justify-end;
+}
+
+.chat-message.assistant {
+  @apply justify-start;
+}
+
+.chat-bubble {
+  @apply max-w-xs lg:max-w-md px-4 py-2 rounded-lg;
+}
+
+.chat-bubble.user {
+  @apply bg-blue-600 text-white;
+}
+
+.chat-bubble.assistant {
+  @apply bg-gray-200 text-gray-900;
+}
+
+/* Upload area styles */
+.upload-area {
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center transition-colors;
+}
+
+.upload-area.dragover {
+  @apply border-blue-500 bg-blue-50;
+}
+
+.upload-area.error {
+  @apply border-red-500 bg-red-50;
+}
+
+/* Document card styles */
+.document-card {
+  @apply bg-white rounded-lg border border-gray-200 p-4 hover:border-gray-300 transition-colors cursor-pointer;
+}
+
+.document-card.selected {
+  @apply border-blue-500 bg-blue-50;
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .mobile-hidden {
+    display: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

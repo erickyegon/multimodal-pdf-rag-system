@@ -1,0 +1,54 @@
+services:
+  # Backend API Service
+  - type: web
+    name: pdf-rag-backend
+    env: python
+    buildCommand: "cd backend && uv pip install -r requirements.txt"
+    startCommand: "cd backend && python app/main.py"
+    plan: standard
+    healthCheckPath: /docs
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
+      - key: EURI_API_KEY
+        sync: false  # Set this manually in Render dashboard
+      - key: EURI_MODEL
+        value: euri-large
+      - key: EURI_EMBEDDING_MODEL
+        value: euri-embeddings
+      - key: DATABASE_URL
+        value: sqlite:///./pdf_rag.db
+      - key: VECTOR_DB_TYPE
+        value: chroma
+      - key: LOG_LEVEL
+        value: INFO
+      - key: DEBUG
+        value: false
+
+  # Frontend Static Site
+  - type: web
+    name: pdf-rag-frontend
+    env: static
+    buildCommand: "cd frontend && npm install && npm run build"
+    staticPublishPath: frontend/build
+    pullRequestPreviewsEnabled: true
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: pdf-rag-backend
+          property: host
+      - key: ESLINT_NO_DEV_ERRORS
+        value: true
+      - key: GENERATE_SOURCEMAP
+        value: false
+
+# Optional: Database service (if using PostgreSQL instead of SQLite)
+# - type: pserv
+#   name: pdf-rag-database
+#   env: postgresql
+#   plan: starter
+#   databaseName: pdf_rag
+#   databaseUser: pdf_rag_user

@@ -1,0 +1,74 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Multimodal PDF RAG System",
+    "tags": ["pdf", "rag", "ai"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "{{endpoint}} - {{method}}"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Response Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "95th percentile"
+          },
+          {
+            "expr": "histogram_quantile(0.50, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "50th percentile"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "PDF Processing Performance",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(pdf_processing_duration_seconds_bucket[5m]))",
+            "legendFormat": "95th percentile by {{file_size_category}}"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Active Chat Sessions",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "active_chat_sessions",
+            "legendFormat": "Active Sessions"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "LLM Token Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(llm_tokens_used_total[5m])",
+            "legendFormat": "{{model}} - {{operation}}"
+          }
+        ]
+      }
+    ],
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "refresh": "30s"
+  }
+}
