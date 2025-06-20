@@ -9,21 +9,19 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)
 
-*An enterprise-grade multimodal document intelligence platform leveraging advanced AI architectures for comprehensive PDF analysis and insights generation.*
+**An enterprise-grade multimodal document intelligence platform leveraging advanced AI architectures for comprehensive PDF analysis and insights generation.**
 
-[🚀 Quick Start](#-quick-start) •
-[🌐 Render Deployment](#-render-deployment-recommended) •
-[🔧 Troubleshooting](#-troubleshooting--common-issues) •
-[✨ Features](#-system-features) •
-[🏗️ Architecture](#-system-architecture) •
-[🔧 API Reference](#-api-reference)
+[🚀 Quick Start](#-quick-start) • [🌐 Deployment](#-deployment) • [✨ Features](#-features) • [🔧 API](#-api-reference)
+
+</div>
 
 ## ⚡ TL;DR - Get Started in 5 Minutes
 
 ```bash
 # 1. Clone and setup backend
-git clone <your-repo> && cd multimodal-pdf-rag/backend
-python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
+git clone https://github.com/erickyegon/multimodal-pdf-rag-system.git
+cd multimodal-pdf-rag-system/backend
+python -m venv .venv && .venv\Scripts\activate  # Windows
 uv pip install -r requirements.txt
 python app/main.py  # Starts at http://localhost:8000
 
@@ -34,8 +32,6 @@ cd ../frontend && npm install && npm start  # Starts at http://localhost:3000
 ```
 
 **Requirements**: Python 3.11+, Node.js 18+, Tesseract OCR ([Windows](https://github.com/UB-Mannheim/tesseract/wiki) | Linux: `apt install tesseract-ocr` | macOS: `brew install tesseract`)
-
-</div>
 
 ---
 
