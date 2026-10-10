@@ -1009,3 +1009,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 *For technical discussions and collaboration opportunities, please reach out via [email](mailto:ai-research@example.com)*
 
 </div>
+
+---
+
+Author: Erick Kiprotich Yegon, epidemiologist and data scientist (real-world evidence, HEOR, causal inference) · Portfolio: https://erickyegon.github.io · LinkedIn: https://linkedin.com/in/erickyegon
